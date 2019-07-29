@@ -1,0 +1,15 @@
+version: "2.4"
+services:
+  http_tester:
+    volumes:
+      - type: volume
+        source: composer_cache
+        target: /var/cache/composer
+      - type: bind
+        source: ../php-web-server-tester/app
+        target: /app
+
+volumes:
+  composer_cache:
+    external: true
+    name: global_composer_cache

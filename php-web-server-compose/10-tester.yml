@@ -1,0 +1,23 @@
+version: "2.4"
+services:
+  http_tester:
+    depends_on:
+      - http_server
+    image: 127.0.0.1:5000/phpdock/php-web-server-tester:${VERSION:-unreleased}
+    user: root
+    command: ["sleep", "infinity"]
+    environment:
+      OPCACHE_ENABLE: "${OPCACHE_ENABLE:-on}"
+      TESTER_TARGET_ENTRYPOINT: http://http_server:80
+      VERSION: "${VERSION:-unreleased}"
+      XDEBUG_ENABLE: "${XDEBUG_ENABLE:-off}"
+      XDEBUG_IDE_KEY: "${XDEBUG_IDE_KEY}"
+      XDEBUG_REMOTE_AUTOSTART: "${XDEBUG_REMOTE_AUTOSTART}"
+      XDEBUG_REMOTE_CONNECT_BACK: "${XDEBUG_REMOTE_CONNECT_BACK}"
+      XDEBUG_REMOTE_HOST: "${XDEBUG_REMOTE_HOST}"
+      XDEBUG_REMOTE_PORT: "${XDEBUG_REMOTE_PORT}"
+    scale: 1
+    restart: always
+    cpu_shares: 1024
+    mem_limit: 1gb
+    memswap_limit: 0

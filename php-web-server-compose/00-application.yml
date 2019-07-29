@@ -1,0 +1,71 @@
+version: "2.4"
+x-environments:
+  &environments
+  APP_ENV: "${APP_ENV:-production}"
+  FPM_WORKERS_COUNT: 2
+  NGINX_CGI_SERVER_HOST: cgi_server
+  NGINX_CGI_SERVER_PORT: 9000
+  NGINX_WORKERS_COUNT: 1
+  OPCACHE_ENABLE: "${OPCACHE_ENABLE:-on}"
+  VERSION: "${VERSION:-unreleased}"
+  XDEBUG_ENABLE: "${XDEBUG_ENABLE:-off}"
+  XDEBUG_IDE_KEY: "${XDEBUG_IDE_KEY}"
+  XDEBUG_REMOTE_AUTOSTART: "${XDEBUG_REMOTE_AUTOSTART}"
+  XDEBUG_REMOTE_CONNECT_BACK: "${XDEBUG_REMOTE_CONNECT_BACK}"
+  XDEBUG_REMOTE_HOST: "${XDEBUG_REMOTE_HOST}"
+  XDEBUG_REMOTE_PORT: "${XDEBUG_REMOTE_PORT}"
+
+services:
+  migrator:
+    image: 127.0.0.1:5000/phpdock/php-web-server-app:${VERSION:-unreleased}
+    user: root
+    command: ["bin/console.php"]
+    environment: *environments
+    scale: 1
+    restart: on-failure
+    cpu_shares: 1024
+    mem_limit: 1gb
+    memswap_limit: 0
+
+  cgi_server:
+    depends_on:
+      - migrator
+    image: 127.0.0.1:5000/phpdock/php-web-server-app:${VERSION:-unreleased}
+    user: root
+    command: ["php-fpm"]
+    healthcheck:
+      test: ["CMD", "php-fpm-healtcheck.bash"]
+    environment: *environments
+    scale: 1
+    restart: always
+    cpu_shares: 1024
+    mem_limit: 1gb
+    memswap_limit: 0
+
+  http_server:
+    depends_on:
+      - cgi_server
+    image: 127.0.0.1:5000/phpdock/php-web-server-app:${VERSION:-unreleased}
+    user: root
+    command: ["nginx"]
+    healthcheck:
+      test: ["CMD", "nginx-healthcheck.bash"]
+    environment: *environments
+    scale: 1
+    restart: always
+    cpu_shares: 1024
+    mem_limit: 1gb
+    memswap_limit: 0
+
+  example_worker:
+    depends_on:
+      - migrator
+    image: 127.0.0.1:5000/phpdock/php-web-server-app:${VERSION:-unreleased}
+    user: root
+    command: ["bin/console.php"]
+    environment: *environments
+    scale: 1
+    restart: always
+    cpu_shares: 1024
+    mem_limit: 1gb
+    memswap_limit: 0

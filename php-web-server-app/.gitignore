@@ -1,0 +1,10 @@
+#############################
+### Application
+#############################
+
+# Package managers
+/app/vendor
+
+# Xdebug output
+/app/xdebug/*
+!/app/xdebug/.gitkeep

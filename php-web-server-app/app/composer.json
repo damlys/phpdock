@@ -1,0 +1,25 @@
+{
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "require": {
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+    "scripts": {
+        "build": [
+            "echo 'building...'"
+        ],
+        "unit-tests": [
+            "vendor/bin/phpunit --testsuite 'Unit Tests Suite'"
+        ]
+    }
+}

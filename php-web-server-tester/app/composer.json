@@ -1,0 +1,29 @@
+{
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "*",
+        "phpunit/phpunit": "*"
+    },
+    "require-dev": {
+    },
+    "scripts": {
+        "build": [
+            "echo 'building...'"
+        ],
+        "target-api-tests": [
+            "vendor/bin/phpunit --testsuite 'API Tests Suite'"
+        ],
+        "unit-tests": [
+            "vendor/bin/phpunit --testsuite 'Unit Tests Suite'"
+        ]
+    }
+}
