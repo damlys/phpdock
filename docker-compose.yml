@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  base_image:
+    build:
+      context: base-image
+      dockerfile: Dockerfile
+    image: 127.0.0.1:5000/phpdock/base-image:0.0.0
+    scale: 0
+
+  app:
+    depends_on:
+      - base_image
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: 127.0.0.1:5000/phpdock/app:0.0.0
+    command: ["bash", "-ce", "php-fpm --daemonize && nginx"]

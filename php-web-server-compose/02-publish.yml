@@ -1,5 +1,0 @@
-version: "2.4"
-services:
-  http_server:
-    ports:
-      - ${HTTP_SERVER_PORT}:80

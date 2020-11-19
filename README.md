@@ -1,48 +1,20 @@
-PHPdock
-===
+# PHPdock
 
-Docker starter for PHP
+Docker starter for PHP projects
 
-## Requirements
+## 101
 
-Docker client and server
+```shell script
+$ ln --symbolic ./.examples/.env .
+$ ln --symbolic ./.examples/docker-compose.override.yml .
 
-```
-$ docker version 
-Client:
- Version:           18.09.5
- ...
+$ docker-compose build
+$ docker-compose up --detach
 
-Server: Docker Engine - Community
- Engine:
-  Version:          18.09.5
-  ...
+$ docker-compose exec app composer install
+$ docker-compose exec app chown --recursive 1000:1000 .
+
+$ docker-compose exec app bash
 ```
 
-Working Docker Engine
-
-```
-$ docker container run --rm hello-world
-
-Hello from Docker!
-This message shows that your installation appears to be working correctly.
-
-...
-```
-
-Docker Compose tool
-
-```
-$ docker-compose version --short 
-1.23.2
-```
-
-*Note:*
-Docker Compose v2 manifests are designed to work
-with standalone Docker Engine and do not
-require Docker Swarm mode
-
-```
-$ docker info --format="{{.Swarm.LocalNodeState}}"
-inactive
-```
+Go to: http://127.0.0.1:38080
