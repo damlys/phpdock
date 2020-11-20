@@ -32,5 +32,8 @@
 # Package managers
 /app/vendor
 
+# Logs
+/app/logs/*
+
 # Xdebug output
 /app/xdebug/*

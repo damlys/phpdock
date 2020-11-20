@@ -14,4 +14,5 @@ COPY ./app /app
 RUN composer run-script build \
 && chmod --recursive a+r /app \
 && chmod --recursive a+x /app/bin/* \
+&& chmod --recursive a+w /app/logs \
 && chmod --recursive a+w /app/xdebug
