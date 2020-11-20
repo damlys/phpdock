@@ -31,6 +31,10 @@
 # Package managers
 /app/vendor
 
+# Logs
+/app/logs/*
+!/app/logs/.gitkeep
+
 # Xdebug output
 /app/xdebug/*
 !/app/xdebug/.gitkeep
