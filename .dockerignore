@@ -29,11 +29,11 @@
 ### Application
 #############################
 
-# Package managers
+# External packages
 /app/vendor
 
 # Logs
 /app/logs/*
 
-# Xdebug output
+# Debug output
 /app/xdebug/*
