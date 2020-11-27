@@ -28,13 +28,13 @@
 ### Application
 #############################
 
-# Package managers
+# External packages
 /app/vendor
 
 # Logs
 /app/logs/*
 !/app/logs/.gitkeep
 
-# Xdebug output
+# Debug output
 /app/xdebug/*
 !/app/xdebug/.gitkeep

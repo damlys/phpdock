@@ -10,6 +10,7 @@ ENV APP_DEFAULT_TIMEZONE="UTC"
 ENV APP_ENV="production"
 ENV APP_TESTS_TARGET_ENTRYPOINT="http://127.0.0.1:8080"
 
+CMD ["bash", "-ce", "php-fpm --daemonize && nginx"]
 COPY ./app /app
 RUN composer run-script build \
 && chmod --recursive a+r /app \

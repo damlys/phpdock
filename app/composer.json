@@ -17,7 +17,7 @@
     },
     "scripts": {
         "build": [
-            "echo 'building...'"
+            "echo 'Building...'"
         ],
         "unit-tests": [
             "vendor/bin/phpunit --testsuite 'Unit Tests Suite'"
