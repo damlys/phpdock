@@ -1,4 +1,4 @@
-FROM php:7-fpm
+FROM php:8-fpm
 USER root
 RUN groupadd --gid 1000 deploy \
 && useradd --uid 1000 --gid deploy --shell /bin/bash --create-home deploy
@@ -12,6 +12,27 @@ RUN apt-get update && apt-get install --yes --no-install-recommends \
   nginx \
 && apt-get clean && rm -rf /var/lib/apt/lists/* \
 && service nginx stop
+
+# Install PHP extensions
+# Note: Xdebug extension is disabled by default. Run `docker-php-ext-enable xdebug` command to enable it
+RUN apt-get update && apt-get install --yes --no-install-recommends \
+  libpq-dev \
+  libzip-dev \
+  unzip \
+  zip \
+  zlib1g-dev \
+&& apt-get clean && rm -rf /var/lib/apt/lists/* \
+&& pecl install \
+  redis \
+  xdebug \
+&& pecl clear-cache \
+&& docker-php-ext-install \
+  opcache \
+  pdo_mysql \
+  pdo_pgsql \
+  zip \
+&& docker-php-ext-enable \
+  redis
 
 # Install Composer
 RUN apt-get update && apt-get install --yes --no-install-recommends \
@@ -38,25 +59,6 @@ RUN apt-get update && apt-get install --yes --no-install-recommends \
 && composer global require bamarni/symfony-console-autocomplete \
 && composer clear-cache \
 && echo "$(php ~/.composer/vendor/bin/symfony-autocomplete --shell bash composer)" > /etc/bash_completion.d/composer
-
-# Install PHP extensions
-# Note: Xdebug extension is disabled by default. Run `docker-php-ext-enable xdebug` command to enable it
-RUN apt-get update && apt-get install --yes --no-install-recommends \
-  libpq-dev \
-  libzip-dev \
-  zlib1g-dev \
-&& apt-get clean && rm -rf /var/lib/apt/lists/* \
-&& pecl install \
-  redis \
-  xdebug \
-&& pecl clear-cache \
-&& docker-php-ext-install \
-  opcache \
-  pdo_mysql \
-  pdo_pgsql \
-  zip \
-&& docker-php-ext-enable \
-  redis
 
 # Nginx configuration
 COPY ./etc/nginx.template.conf /etc/nginx/nginx.template.conf

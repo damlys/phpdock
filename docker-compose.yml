@@ -4,7 +4,7 @@ services:
     build:
       context: base-image
       dockerfile: Dockerfile
-    image: 127.0.0.1:5000/phpdock/base-image:0.0.0
+    image: damlys/phpdock-base-image:0.0.0
     scale: 0
 
   app:
@@ -13,4 +13,4 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: 127.0.0.1:5000/phpdock/app:0.0.0
+    image: damlys/phpdock-app:0.0.0
