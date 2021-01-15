@@ -89,4 +89,4 @@ ENV XDEBUG_IDE_KEY="DOCKER"
 COPY ./bin/entrypoint.bash /usr/local/bin/entrypoint.bash
 RUN chmod a+x /usr/local/bin/entrypoint.bash
 ENTRYPOINT ["entrypoint.bash"]
-CMD ["php", "-r", "echo(\"Command is not defined.\n\");exit(127);"]
+CMD ["bash", "-ce", "php-fpm --daemonize; nginx"]

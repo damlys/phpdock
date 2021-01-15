@@ -4,13 +4,13 @@ services:
     build:
       context: base-image
       dockerfile: Dockerfile
-    image: damlys/phpdock-base-image:0.0.0
+    image: 127.0.0.1:5000/phpdock/base-image:0.0.0
     scale: 0
 
   app:
     depends_on:
-      - base_image
+    - base_image
     build:
       context: .
       dockerfile: Dockerfile
-    image: damlys/phpdock-app:0.0.0
+    image: 127.0.0.1:5000/phpdock/app:0.0.0

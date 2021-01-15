@@ -13,21 +13,21 @@ services:
       XDEBUG_IDE_KEY: "DOCKER"
       APP_ENV: "development"
     ports:
-      - mode: host
-        target: 8080
-        published: 38080
-        protocol: tcp
-      - mode: host
-        target: 9000
-        published: 39000
-        protocol: tcp
+    - mode: host
+      target: 8080
+      published: 38080
+      protocol: tcp
+    - mode: host
+      target: 9000
+      published: 39000
+      protocol: tcp
     volumes:
-      - type: volume
-        source: composer_cache
-        target: /var/cache/composer
-      - type: bind
-        source: ./app
-        target: /app
+    - type: volume
+      source: composer_cache
+      target: /var/cache/composer
+    - type: bind
+      source: ./app
+      target: /app
 
 volumes:
   composer_cache:

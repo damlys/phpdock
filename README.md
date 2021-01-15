@@ -11,10 +11,16 @@ $ ln --symbolic ./.examples/docker-compose.override.yml .
 $ docker-compose build
 $ docker-compose up --detach
 
-$ docker-compose exec app composer install
-$ docker-compose exec app chown --recursive 1000:1000 .
+$ docker-compose exec app bash -ce "
+    composer install
+    chown --recursive 1000:1000 .
+    composer run-script unit-tests
+    composer run-script http-api-tests
+  "
 
 $ docker-compose exec app bash
+
+$ docker-compose down --volumes
 ```
 
-Go to: http://127.0.0.1:38080
+Go to: [http://127.0.0.1:38080](http://127.0.0.1:38080)
