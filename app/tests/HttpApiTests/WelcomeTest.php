@@ -1,20 +1,23 @@
 <?php
 declare(strict_types=1);
 
-namespace HttpApiTests;
+namespace Tests\HttpApiTests;
 
 class WelcomeTest extends \PHPUnit\Framework\TestCase
 {
-    public function getTestsTargetEntrypoint(): string
+    public function getHttpTestsEndpoint(): string
     {
-        return $_ENV['APP_TESTS_TARGET_ENTRYPOINT'];
+        if (!isset($_ENV['HTTP_TESTS_ENDPOINT']) || $_ENV['HTTP_TESTS_ENDPOINT'] === '') {
+            throw new \Exception('HTTP tests endpoint is not defined.');
+        }
+        return $_ENV['HTTP_TESTS_ENDPOINT'];
     }
 
     public function testWelcomeMessage(): void
     {
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('GET', $this->getTestsTargetEntrypoint());
+        $response = $client->request('GET', $this->getHttpTestsEndpoint());
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('application/json', array_shift($response->getHeader('Content-Type')));

@@ -1,8 +1,6 @@
 version: "3.8"
 services:
-  base_image:
-
-  app:
+  http_server:
     environment:
       OPCACHE_ENABLE: "off"
       XDEBUG_ENABLE: "on"
@@ -11,24 +9,24 @@ services:
       XDEBUG_REMOTE_HOST: ""
       XDEBUG_REMOTE_PORT: "9000"
       XDEBUG_IDE_KEY: "DOCKER"
-      APP_ENV: "development"
     ports:
-    - mode: host
-      target: 8080
-      published: 38080
-      protocol: tcp
-    - mode: host
-      target: 9000
-      published: 39000
-      protocol: tcp
+      - mode: host
+        target: 8080
+        published: 38080
+        protocol: tcp
+      - mode: host
+        target: 9000
+        published: 39000
+        protocol: tcp
     volumes:
-    - type: volume
-      source: composer_cache
-      target: /var/cache/composer
-    - type: bind
-      source: ./app
-      target: /app
+      - type: volume
+        source: composer_cache
+        target: /var/cache/composer
+      - type: bind
+        source: ./app
+        target: /app
 
 volumes:
   composer_cache:
+    driver: local
     name: global_composer_cache
