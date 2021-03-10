@@ -10,7 +10,7 @@ if [[ "$(id --user)" == '0' ]]
 then
   inject_environment_variables < /etc/nginx/nginx.template.conf > /etc/nginx/nginx.conf
 
-  if [[ "$XDEBUG_ENABLE" == 'on' ]]
+  if [[ "$XDEBUG_ENABLE" == '1' ]]
   then
     if php -r "exit(extension_loaded(\"xdebug\") ? 1 : 0);"
     then
