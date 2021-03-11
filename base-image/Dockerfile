@@ -87,4 +87,4 @@ ENV XDEBUG_SESSION="DOCKER"
 COPY ./bin/entrypoint.bash /usr/local/bin/entrypoint.bash
 RUN chmod a+x /usr/local/bin/entrypoint.bash
 ENTRYPOINT ["entrypoint.bash"]
-CMD ["bash", "-ce", "php-fpm --daemonize; nginx"]
+CMD ["bash", "-ce", "php-fpm --daemonize && nginx"]
