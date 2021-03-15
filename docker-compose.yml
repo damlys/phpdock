@@ -1,18 +1,20 @@
 version: "3.8"
-services:
-  base_image:
-    build:
-      context: base-image
-      dockerfile: Dockerfile
-    image: 127.0.0.1:5000/phpdock/base-image:0.0.0
-    scale: 0
+x-common-app-config:
+  &common-app-config
+  build:
+    context: .
+    dockerfile: Dockerfile
+  image: damlys/phpdock-app:0.0.0
+  environment:
+    HTTP_TESTS_ENDPOINT: http://http_server:8080
 
+services:
   http_server:
-    depends_on:
-      - base_image
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: 127.0.0.1:5000/phpdock/app:0.0.0
-    environment:
-      HTTP_TESTS_ENDPOINT: http://127.0.0.1:8080
+    <<: *common-app-config
+
+  example_job:
+    <<: *common-app-config
+    command:
+      - php
+      - bin/console.php
+      - do-example-job

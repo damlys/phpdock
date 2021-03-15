@@ -1,24 +1,31 @@
 version: "3.8"
+x-common-app-config:
+  &common-app-config
+  environment:
+    OPCACHE_ENABLE: "off"
+    XDEBUG_ENABLE: "1"
+    XDEBUG_MODE: "debug"
+    XDEBUG_CONFIG: "client_host=host.docker.internal start_with_request=yes idekey=PHPSTORM"
+    XDEBUG_SESSION: "PHPSTORM"
+  volumes:
+    - type: volume
+      source: composer_cache
+      target: /var/cache/composer
+    - type: bind
+      source: ./app
+      target: /app
+
 services:
   http_server:
-    environment:
-      OPCACHE_ENABLE: "off"
-      XDEBUG_ENABLE: "1"
-      XDEBUG_MODE: "debug"
-      XDEBUG_CONFIG: "client_host=host.docker.internal start_with_request=yes idekey=PHPSTORM"
-      XDEBUG_SESSION: "PHPSTORM"
+    <<: *common-app-config
     ports:
       - mode: host
         target: 8080
-        published: 38080
+        published: 8080
         protocol: tcp
-    volumes:
-      - type: volume
-        source: composer_cache
-        target: /var/cache/composer
-      - type: bind
-        source: ./app
-        target: /app
+
+  example_job:
+    <<: *common-app-config
 
 volumes:
   composer_cache:

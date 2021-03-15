@@ -1,4 +1,4 @@
-FROM php:8-fpm
+FROM php:8.0-fpm
 USER root
 RUN groupadd --gid 1000 deploy \
 && useradd --uid 1000 --gid deploy --shell /bin/bash --create-home deploy
@@ -74,7 +74,7 @@ COPY ./etc/php-fpm.conf /usr/local/etc/php-fpm.d/zzz-php-fpm.conf
 COPY ./etc/xdebug.ini /usr/local/etc/php/conf.d/zzz-xdebug.ini
 # debug|notice|warning|error|alert (https://www.php.net/manual/en/install.fpm.configuration.php#log-level)
 ENV FPM_LOG_LEVEL="error"
-ENV FPM_WORKERS_COUNT="1"
+ENV FPM_WORKERS_COUNT="2"
 ENV OPCACHE_ENABLE="on"
 # E_ALL|E_STRICT|E_NOTICE|E_WARNING|E_ERROR|E_CORE_ERROR (https://www.php.net/manual/en/errorfunc.constants.php)
 ENV PHP_LOG_LEVEL="E_ERROR"
@@ -87,4 +87,4 @@ ENV XDEBUG_SESSION="DOCKER"
 COPY ./bin/entrypoint.bash /usr/local/bin/entrypoint.bash
 RUN chmod a+x /usr/local/bin/entrypoint.bash
 ENTRYPOINT ["entrypoint.bash"]
-CMD ["bash", "-ce", "php-fpm --daemonize && nginx"]
+CMD ["bash", "-c", "php-fpm --daemonize && nginx"]

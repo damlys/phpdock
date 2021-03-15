@@ -1,0 +1,57 @@
+name: Continuous Delivery
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "**"
+      - "!**.md"
+  pull_request:
+    paths:
+      - "**"
+      - "!**.md"
+jobs:
+  job0:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Login to Docker Hub
+        run: docker login --username="damlys" --password="${{ secrets.DOCKER_TOKEN }}"
+      - name: Set Git user
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+      - name: Clone repository
+        uses: actions/checkout@v2
+
+      - name: Build phpdock-rte-sdk image
+        working-directory: phpdock-rte-sdk
+        run: docker-compose build
+      - name: Build phpdock-app image
+        run: docker-compose build
+
+      - name: Copy docker-compose.override.yml
+        run: cp ./.github/docker-compose.override.yml ./docker-compose.override.yml
+      - name: Run containers
+        run: docker-compose up --detach
+      - name: Wait 10s
+        run: sleep 10
+
+      - name: Install dependencies
+        run: docker-compose exec -T http_server composer install
+      - name: Build application
+        run: docker-compose exec -T http_server composer run-script build
+      - name: Run code tests
+        run: docker-compose exec -T http_server composer run-script unit-tests
+      - name: Run HTTP API tests
+        run: docker-compose exec -T http_server composer run-script http-api-tests
+
+      - name: Destroy containers
+        run: docker-compose down --volumes
+
+      - if: github.event_name == 'push'
+        name: Publish phpdock-rte-sdk image
+        working-directory: phpdock-rte-sdk
+        run: docker-compose push
+      - if: github.event_name == 'push'
+        name: Publish phpdock-app image
+        run: docker-compose push

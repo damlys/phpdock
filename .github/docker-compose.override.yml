@@ -1,0 +1,12 @@
+version: "3.8"
+x-common-app-config:
+  &common-app-config
+  environment:
+    FOO: bar
+
+services:
+  http_server:
+    <<: *common-app-config
+
+  example_job:
+    <<: *common-app-config

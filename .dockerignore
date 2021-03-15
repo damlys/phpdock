@@ -24,6 +24,3 @@
 
 # Logs
 /app/logs/*
-
-# Debug output
-/app/xdebug/*

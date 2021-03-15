@@ -33,7 +33,3 @@
 # Logs
 /app/logs/*
 !/app/logs/.gitkeep
-
-# Debug output
-/app/xdebug/*
-!/app/xdebug/.gitkeep
