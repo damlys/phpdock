@@ -5,6 +5,9 @@ x-common-app-config:
     FOO: bar
 
 services:
+  workspace:
+    <<: *common-app-config
+
   http_server:
     <<: *common-app-config
 

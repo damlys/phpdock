@@ -9,6 +9,12 @@ x-common-app-config:
     HTTP_TESTS_ENDPOINT: http://http_server:8080
 
 services:
+  workspace:
+    <<: *common-app-config
+    command:
+      - sleep
+      - infinity
+
   http_server:
     <<: *common-app-config
 

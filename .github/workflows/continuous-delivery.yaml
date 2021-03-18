@@ -37,16 +37,16 @@ jobs:
         run: sleep 10
 
       - name: Install dependencies
-        run: docker-compose exec -T http_server composer install
+        run: docker-compose exec -T workspace composer install
       - name: Build application
-        run: docker-compose exec -T http_server composer run-script build
+        run: docker-compose exec -T workspace composer run-script build
       - name: Run code tests
-        run: docker-compose exec -T http_server composer run-script unit-tests
+        run: docker-compose exec -T workspace composer run-script unit-tests
       - name: Run HTTP API tests
-        run: docker-compose exec -T http_server composer run-script http-api-tests
+        run: docker-compose exec -T workspace composer run-script http-api-tests
 
       - name: Destroy containers
-        run: docker-compose down --volumes
+        run: docker-compose down --volumes --remove-orphans
 
       - if: github.event_name == 'push'
         name: Publish phpdock-rte-sdk image
