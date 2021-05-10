@@ -7,6 +7,8 @@ x-common-app-config:
 services:
   workspace:
     <<: *common-app-config
+    environment:
+      OPCACHE_ENABLE: "off"
 
   http_server:
     <<: *common-app-config

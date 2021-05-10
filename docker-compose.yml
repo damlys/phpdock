@@ -1,10 +1,10 @@
 version: "3.8"
 x-common-app-config:
   &common-app-config
+  image: damlys/phpdock-app:${VERSION:-0.0.1}
   build:
     context: .
     dockerfile: Dockerfile
-  image: damlys/phpdock-app:0.0.0
   environment:
     HTTP_TESTS_ENDPOINT: http://http_server:8080
 
@@ -20,7 +20,10 @@ services:
 
   example_job:
     <<: *common-app-config
-    command:
+    user: "1000"
+    entrypoint:
+      - entrypoint.bash
       - php
       - bin/console.php
+    command:
       - do-example-job

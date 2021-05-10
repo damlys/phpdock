@@ -1,22 +1,53 @@
 #############################
-### System files
+### System
 #############################
 
-/**/*~
-/**/.DS_Store
-/**/desktop.ini
-/**/thumbs.db
+*.bak
+*.swp
+*.tmp
+*~
+.DS_Store
+desktop.ini
+thumbs.db
+
+#############################
+### IDE
+#############################
+
+*.code-workspace
+*.sublime-project
+*.sublime-workspace
+.idea
+.vscode
 
 #############################
 ### VCS
 #############################
 
-/**/.git
-/**/.gitignore
-/**/.gitkeep
+.git
+.gitignore
+.gitkeep
 
 #############################
-### Application
+### Docker
+#############################
+
+/.dockerignore
+/Dockerfile
+/docker-compose.override.yml
+/docker-compose.yml
+
+#############################
+### Node.js
+#############################
+
+/node_modules
+/npm-debug.log
+/package-lock.json
+/package.json
+
+#############################
+### PHP
 #############################
 
 # External packages

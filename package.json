@@ -1,0 +1,33 @@
+{
+  "private": true,
+  "devDependencies": {
+    "@damlys/standard-version-updater-docker": "^1.0.0",
+    "standard-version": "^9.3.0"
+  },
+  "standard-version": {
+    "packageFiles": [
+      {
+        "filename": "app/composer.json",
+        "type": "json"
+      }
+    ],
+    "bumpFiles": [
+      {
+        "filename": "app/composer.json",
+        "type": "json"
+      },
+      {
+        "filename": "Dockerfile",
+        "updater": "node_modules/@damlys/standard-version-updater-docker/dist/dockerfile.js"
+      },
+      {
+        "filename": "docker-compose.yml",
+        "updater": "node_modules/@damlys/standard-version-updater-docker/dist/docker-compose.js"
+      }
+    ]
+  },
+  "scripts": {
+    "bump-version:prerelease": "standard-version --prerelease='rc'",
+    "bump-version:release": "standard-version"
+  }
+}

@@ -1,21 +1,24 @@
 #############################
-### System files
+### System
 #############################
 
-/**/*~
-/**/.DS_Store
-/**/desktop.ini
-/**/thumbs.db
+*.bak
+*.swp
+*.tmp
+*~
+.DS_Store
+desktop.ini
+thumbs.db
 
 #############################
 ### IDE
 #############################
 
-/*.code-workspace
-/*.sublime-project
-/*.sublime-workspace
-/.idea
-/.vscode
+*.code-workspace
+*.sublime-project
+*.sublime-workspace
+.idea
+.vscode
 
 #############################
 ### Docker
@@ -24,7 +27,14 @@
 /docker-compose.override.yml
 
 #############################
-### Application
+### Node.js
+#############################
+
+/node_modules
+/npm-debug.log
+
+#############################
+### PHP
 #############################
 
 # External packages
