@@ -3,7 +3,7 @@ USER root
 RUN groupadd --gid 1000 deploy \
 && useradd --uid 1000 --gid deploy --shell /bin/bash --create-home deploy
 WORKDIR /app
-EXPOSE 8080 9000
+EXPOSE 8080 9003
 HEALTHCHECK NONE
 
 # Install Nginx

@@ -8,6 +8,7 @@ Docker starter for PHP projects
 $ ln -s ./.examples/docker-compose.override.yml .
 
 $ docker-compose build
+
 $ docker-compose up --detach
 
 $ docker-compose exec workspace bash -ce "
@@ -19,8 +20,10 @@ $ docker-compose exec workspace bash -ce "
   "
 
 $ docker-compose exec workspace bash
-
-$ docker-compose down --remove-orphans
 ```
 
-Go to [http://127.0.0.1:8080](http://127.0.0.1:8080)
+Go to [http://127.0.0.1:38080](http://127.0.0.1:38080)
+
+```shell
+$ docker-compose down --remove-orphans
+```

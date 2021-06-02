@@ -11,8 +11,10 @@ x-common-app-config:
 services:
   workspace:
     <<: *common-app-config
-    command:
+    entrypoint:
+      - entrypoint.bash
       - sleep
+    command:
       - infinity
 
   http_server:
