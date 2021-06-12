@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.4 (2021-06-12)
+
+
+### Features
+
+* add commitlint, add husky ([c8f0175](https://github.com/damlys/phpdock/commit/c8f01752b938ef2a646620b0023ac46bd42f33d7))
+
 ### 0.0.3 (2021-06-02)
 
 ### 0.0.2 (2021-05-10)

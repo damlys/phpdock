@@ -1,6 +1,6 @@
 FROM damlys/phpdock-rte-sdk:0.0.0
 
-ENV VERSION="0.0.3"
+ENV VERSION="0.0.4"
 COPY ./app/composer.json ./app/composer.lock /app/
 RUN composer install --no-dev --no-scripts \
 && composer clear-cache
