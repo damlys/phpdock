@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.5 (2021-06-12)
+
+
+### Bug Fixes
+
+* expose 9000 instead of 9003 ([570903e](https://github.com/damlys/phpdock/commit/570903e893038ebf1f7d9897e6cf93a0793247b5))
+
 ### 0.0.4 (2021-06-12)
 
 
