@@ -1,8 +1,16 @@
 {
   "private": true,
   "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
     "@damlys/standard-version-updater-docker": "^1.0.0",
+    "husky": "^6.0.0",
     "standard-version": "^9.3.0"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
   "standard-version": {
     "packageFiles": [
@@ -27,6 +35,7 @@
     ]
   },
   "scripts": {
+    "prepare": "husky install",
     "bump-version:prerelease": "standard-version --prerelease='rc'",
     "bump-version:release": "standard-version"
   }
