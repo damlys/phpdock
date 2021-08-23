@@ -1,31 +1,17 @@
 version: "3.8"
-x-common-app-config:
-  &common-app-config
-  image: damlys/phpdock-app:${VERSION:-0.0.6}
-  build:
-    context: .
-    dockerfile: Dockerfile
-  environment:
-    HTTP_TESTS_ENDPOINT: http://http_server:8080
-
 services:
-  workspace:
-    <<: *common-app-config
-    entrypoint:
-      - entrypoint.bash
-      - sleep
-    command:
-      - infinity
-
-  http_server:
-    <<: *common-app-config
-
-  example_job:
-    <<: *common-app-config
-    user: "1000"
-    entrypoint:
-      - entrypoint.bash
-      - php
-      - bin/console.php
-    command:
-      - do-example-job
+  rte:
+    build:
+      context: ./rte
+      dockerfile: Dockerfile
+    image: damlys/phpdock-rte:latest
+    scale: 0
+  app:
+    depends_on:
+      - rte
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: damlys/phpdock-app:${VERSION:-0.0.6}
+    environment:
+      HTTP_TESTS_ENDPOINT: http://127.0.0.1:8080

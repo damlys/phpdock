@@ -1,7 +1,0 @@
-version: "3.8"
-services:
-  phpdock_rte_sdk:
-    image: damlys/phpdock-rte-sdk:0.0.0
-    build:
-      context: .
-      dockerfile: Dockerfile

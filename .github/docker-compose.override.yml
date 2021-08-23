@@ -1,17 +1,5 @@
 version: "3.8"
-x-common-app-config:
-  &common-app-config
-  environment:
-    FOO: bar
-
 services:
-  workspace:
-    <<: *common-app-config
+  app:
     environment:
       OPCACHE_ENABLE: "off"
-
-  http_server:
-    <<: *common-app-config
-
-  example_job:
-    <<: *common-app-config

@@ -11,7 +11,7 @@ $ docker-compose build
 
 $ docker-compose up --detach
 
-$ docker-compose exec workspace bash -ce "
+$ docker-compose exec app bash -ce "
     composer install
     composer run-script build
     chown -R $(id -u):$(id -g) .
@@ -19,7 +19,7 @@ $ docker-compose exec workspace bash -ce "
     composer run-script http-api-tests
   "
 
-$ docker-compose exec workspace bash
+$ docker-compose exec app bash
 ```
 
 Go to [http://127.0.0.1:38080](http://127.0.0.1:38080)

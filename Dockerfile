@@ -1,8 +1,8 @@
-FROM damlys/phpdock-rte-sdk:0.0.0
+FROM damlys/phpdock-rte:latest
 
 ENV VERSION="0.0.6"
 COPY ./app/composer.json ./app/composer.lock /app/
-RUN composer install --no-dev --no-scripts \
+RUN composer install \
 && composer clear-cache
 
 COPY ./app /app

@@ -20,7 +20,7 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-      - name: Clone repository
+      - name: Clone Git repository
         uses: actions/checkout@v2
 
       - name: Install NPM modules
@@ -32,35 +32,24 @@ jobs:
         name: Bump version (release)
         run: npm run bump-version:release
 
-      - name: Build phpdock-rte-sdk image
-        working-directory: phpdock-rte-sdk
-        run: docker-compose build
-      - name: Build phpdock-app image
+      - name: Build Docker images
         run: docker-compose build
 
       - name: Copy docker-compose.override.yml
         run: cp ./.github/docker-compose.override.yml ./docker-compose.override.yml
-      - name: Run containers
+      - name: Run Docker containers
         run: docker-compose up --detach
       - name: Wait 10s
         run: sleep 10
-      - name: Install dependencies
-        run: docker-compose exec -T workspace composer install
-      - name: Build application
-        run: docker-compose exec -T workspace composer run-script build
-      - name: Run code tests
-        run: docker-compose exec -T workspace composer run-script unit-tests
+      - name: Run unit tests
+        run: docker-compose exec -T app composer run-script unit-tests
       - name: Run HTTP API tests
-        run: docker-compose exec -T workspace composer run-script http-api-tests
-      - name: Destroy containers
+        run: docker-compose exec -T app composer run-script http-api-tests
+      - name: Destroy Docker containers
         run: docker-compose down --volumes --remove-orphans
 
       - if: github.event_name == 'push'
-        name: Publish phpdock-rte-sdk image
-        working-directory: phpdock-rte-sdk
-        run: docker-compose push
-      - if: github.event_name == 'push'
-        name: Publish phpdock-app image
+        name: Publish Docker images
         run: docker-compose push
       - if: github.event_name == 'push'
         name: Publish version
