@@ -12,6 +12,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: damlys/phpdock-app:${VERSION:-0.0.6}
+    image: damlys/phpdock-app:${VERSION:-0.0.7}
     environment:
       HTTP_TESTS_ENDPOINT: http://127.0.0.1:8080
