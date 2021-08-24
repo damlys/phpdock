@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.8 (2021-08-24)
+
+
+### Features
+
+* move logs dirs to env vars ([348c534](https://github.com/damlys/phpdock/commit/348c53438b4a17f65b10b6383db94848f4729b1a))
+
 ### 0.0.7 (2021-08-23)
 
 ### 0.0.6 (2021-06-28)
