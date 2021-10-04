@@ -1,12 +1,12 @@
-version: "3.8"
+version: "3.9"
 services:
   app:
     environment:
       NGINX_ACCESS_LOG: "/app/logs/nginx.access.log"
       NGINX_ERROR_LOG: "/app/logs/nginx.error.log"
-      PHP_ERROR_LOG: "/app/logs/php.error.log"
       FPM_ACCESS_LOG: "/app/logs/php-fpm.access.log"
       FPM_ERROR_LOG: "/app/logs/php-fpm.error.log"
+      PHP_ERROR_LOG: "/app/logs/php.error.log"
       XDEBUG_OUTPUT_DIR: "/app/logs"
       OPCACHE_ENABLE: "off"
       XDEBUG_ENABLE: "1"
