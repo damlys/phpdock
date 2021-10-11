@@ -32,10 +32,10 @@ thumbs.db
 ### Docker
 #############################
 
-/.dockerignore
-/Dockerfile
-/docker-compose.override.yml
-/docker-compose.yml
+.dockerignore
+Dockerfile
+docker-compose.*.yml
+docker-compose.yml
 
 #############################
 ### Node.js
@@ -50,8 +50,5 @@ thumbs.db
 ### PHP
 #############################
 
-# External packages
-/app/vendor
-
-# Logs
 /app/logs/*
+/app/vendor

@@ -1,4 +1,4 @@
-name: Continuous Delivery
+name: Continuous Deployment
 on:
   push:
     branches:
@@ -55,3 +55,10 @@ jobs:
       - if: github.event_name == 'push'
         name: Publish version
         run: git push && git push --tags
+
+      - if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+        name: Deploy to staging
+        run: echo "Deploying to staging..."
+      - if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        name: Deploy to production
+        run: echo "Deploying to production..."

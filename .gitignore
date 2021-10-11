@@ -37,9 +37,6 @@ thumbs.db
 ### PHP
 #############################
 
-# External packages
-/app/vendor
-
-# Logs
 /app/logs/*
 !/app/logs/.gitkeep
+/app/vendor

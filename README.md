@@ -6,11 +6,8 @@ Docker starter for PHP projects
 
 ```shell
 $ ln -s ./.examples/docker-compose.override.yml .
-
 $ docker-compose build
-
 $ docker-compose up --detach
-
 $ docker-compose exec app bash -ce "
     composer install
     composer run-script build
@@ -18,7 +15,6 @@ $ docker-compose exec app bash -ce "
     composer run-script unit-tests
     composer run-script http-api-tests
   "
-
 $ docker-compose exec app bash
 ```
 

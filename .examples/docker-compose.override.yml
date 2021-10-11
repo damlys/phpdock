@@ -7,12 +7,10 @@ services:
       FPM_ACCESS_LOG: "/app/logs/php-fpm.access.log"
       FPM_ERROR_LOG: "/app/logs/php-fpm.error.log"
       PHP_ERROR_LOG: "/app/logs/php.error.log"
-      XDEBUG_OUTPUT_DIR: "/app/logs"
-      OPCACHE_ENABLE: "off"
-      XDEBUG_ENABLE: "1"
+      PHP_OPCACHE_ENABLE: "false"
       XDEBUG_MODE: "debug"
-      XDEBUG_CONFIG: "client_host=host.docker.internal start_with_request=yes idekey=PHPSTORM"
-      XDEBUG_SESSION: "PHPSTORM"
+      XDEBUG_CONFIG: "client_host=host.docker.internal"
+      XDEBUG_OUTPUT_DIR: "/app/logs"
     ports:
       - mode: host
         target: 8080

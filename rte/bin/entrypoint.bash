@@ -8,15 +8,10 @@ inject_environment_variables()
 
 if [[ "$(id --user)" == '0' ]]
 then
+  echo 'Generating the "/etc/nginx/nginx.conf" file.'
   inject_environment_variables < /etc/nginx/nginx.template.conf > /etc/nginx/nginx.conf
-
-  if [[ "$XDEBUG_ENABLE" == '1' ]]
-  then
-    if php -r "exit(extension_loaded(\"xdebug\") ? 1 : 0);"
-    then
-      docker-php-ext-enable xdebug
-    fi
-  fi
+else
+  echo 'Skipping generation of "/etc/nginx/nginx.conf" file.'
 fi
 
 exec "$@"
