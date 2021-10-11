@@ -1,6 +1,6 @@
 FROM damlys/phpdock-rte:latest
 
-ENV VERSION="0.0.9"
+ENV VERSION="0.0.10"
 COPY ./app/composer.json ./app/composer.lock /app/
 RUN composer install \
 && composer clear-cache
