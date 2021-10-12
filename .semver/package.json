@@ -15,27 +15,28 @@
   "standard-version": {
     "packageFiles": [
       {
-        "filename": "app/composer.json",
+        "filename": "../app/composer.json",
         "type": "json"
       }
     ],
     "bumpFiles": [
       {
-        "filename": "app/composer.json",
+        "filename": "../app/composer.json",
         "type": "json"
       },
       {
-        "filename": "Dockerfile",
+        "filename": "../Dockerfile",
         "updater": "node_modules/@damlys/standard-version-updater-docker/dist/dockerfile.js"
       },
       {
-        "filename": "docker-compose.yml",
+        "filename": "../docker-compose.yml",
         "updater": "node_modules/@damlys/standard-version-updater-docker/dist/docker-compose.js"
       }
-    ]
+    ],
+    "infile": "../CHANGELOG.md"
   },
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "cd .. && husky install ./.semver/husky",
     "bump-version:prerelease": "standard-version --prerelease='rc'",
     "bump-version:release": "standard-version"
   }
