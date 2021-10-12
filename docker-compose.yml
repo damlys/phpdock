@@ -1,12 +1,4 @@
-version: "3.9"
 services:
-  rte:
-    build:
-      context: ./rte
-      dockerfile: Dockerfile
-    image: damlys/phpdock-rte:latest
-    deploy:
-      replicas: 0
   app:
     build:
       context: .

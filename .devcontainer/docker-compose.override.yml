@@ -1,15 +1,15 @@
-version: "3.9"
 services:
   app:
     environment:
+      PHP_OPCACHE_ENABLE: "false"
+      XDEBUG_MODE: "debug"
+      XDEBUG_CONFIG: "discover_client_host=false client_host=host.docker.internal"
+      # Logs
       NGINX_ACCESS_LOG: "/app/logs/nginx.access.log"
       NGINX_ERROR_LOG: "/app/logs/nginx.error.log"
       FPM_ACCESS_LOG: "/app/logs/php-fpm.access.log"
       FPM_ERROR_LOG: "/app/logs/php-fpm.error.log"
       PHP_ERROR_LOG: "/app/logs/php.error.log"
-      PHP_OPCACHE_ENABLE: "false"
-      XDEBUG_MODE: "debug"
-      XDEBUG_CONFIG: "discover_client_host=false client_host=host.docker.internal"
       XDEBUG_OUTPUT_DIR: "/app/logs"
     ports:
       - mode: host
@@ -17,12 +17,12 @@ services:
         published: 38080
         protocol: tcp
     volumes:
-      - type: bind
-        source: ./app
-        target: /app
       - type: volume
         source: composer_cache
         target: /var/cache/composer
+      - type: bind
+        source: ./app
+        target: /app
     working_dir: /app
 volumes:
   composer_cache:

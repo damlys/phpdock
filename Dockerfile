@@ -1,4 +1,4 @@
-FROM damlys/phpdock-rte:latest
+FROM damlys/phpdock-env:sdk-0.0.0
 
 ENV VERSION="0.0.10"
 COPY ./app/composer.json ./app/composer.lock /app/
