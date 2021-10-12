@@ -18,7 +18,6 @@ thumbs.db
 *.sublime-project
 *.sublime-workspace
 .idea
-.vscode
 
 #############################
 ### Docker

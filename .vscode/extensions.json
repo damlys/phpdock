@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "editorconfig.editorconfig",
+    "felixfbecker.php-pack",
+    "ms-azuretools.vscode-docker"
+  ]
+}

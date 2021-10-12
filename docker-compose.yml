@@ -5,12 +5,9 @@ services:
       context: ./rte
       dockerfile: Dockerfile
     image: damlys/phpdock-rte:latest
-    entrypoint: ["bash", "-c"]
-    command: ["exit 0"]
+    deploy:
+      replicas: 0
   app:
-    depends_on:
-      rte:
-        condition: service_completed_successfully
     build:
       context: .
       dockerfile: Dockerfile

@@ -1,4 +1,4 @@
-name: Continuous Deployment
+name: continuous-deployment
 on:
   push:
     branches:
@@ -37,7 +37,7 @@ jobs:
         run: docker-compose build
 
       - name: Copy docker-compose.override.yml
-        run: cp ./.github/docker-compose.override.yml ./docker-compose.override.yml
+        run: ln -s ./.github/docker-compose.override.yml .
       - name: Run Docker containers
         run: docker-compose up --detach
       - name: Wait 10s
