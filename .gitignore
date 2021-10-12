@@ -29,8 +29,8 @@ thumbs.db
 ### Node.js
 #############################
 
-/node_modules
-/npm-debug.log
+node_modules
+npm-debug.log
 
 #############################
 ### PHP

@@ -29,12 +29,15 @@ jobs:
         run: docker-compose build && docker-compose push
 
       - name: Install NPM modules
+        working-directory: ./.semver
         run: npm install
       - if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
         name: Bump version (prerelease)
+        working-directory: ./.semver
         run: npm run bump-version:prerelease
       - if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         name: Bump version (release)
+        working-directory: ./.semver
         run: npm run bump-version:release
 
       - name: Build Docker images
