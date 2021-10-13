@@ -28,22 +28,23 @@ jobs:
         working-directory: ./env
         run: docker-compose build && docker-compose push
 
-      - name: Install NPM modules
+      - if: github.event_name == 'push'
+        name: Install NPM modules
         working-directory: ./.semver
         run: npm install
       - if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
         name: Bump version (prerelease)
         working-directory: ./.semver
-        run: npm run bump-version:prerelease
+        run: npm run release -- --prerelease='rc'
       - if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         name: Bump version (release)
         working-directory: ./.semver
-        run: npm run bump-version:release
+        run: npm run release
 
       - name: Build Docker images
         run: docker-compose build
 
-      - name: Copy docker-compose.override.yml
+      - name: Link docker-compose.override.yml
         run: ln -s ./.github/docker-compose.override.yml .
       - name: Run Docker containers
         run: docker-compose up --detach

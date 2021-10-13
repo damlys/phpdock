@@ -7,37 +7,8 @@
     "husky": "^7.0.2",
     "standard-version": "^9.3.1"
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
-  "standard-version": {
-    "packageFiles": [
-      {
-        "filename": "../app/composer.json",
-        "type": "json"
-      }
-    ],
-    "bumpFiles": [
-      {
-        "filename": "../app/composer.json",
-        "type": "json"
-      },
-      {
-        "filename": "../Dockerfile",
-        "updater": "node_modules/@damlys/standard-version-updater-docker/dist/dockerfile.js"
-      },
-      {
-        "filename": "../docker-compose.yml",
-        "updater": "node_modules/@damlys/standard-version-updater-docker/dist/docker-compose.js"
-      }
-    ],
-    "infile": "../CHANGELOG.md"
-  },
   "scripts": {
     "prepare": "cd .. && husky install ./.semver/husky",
-    "bump-version:prerelease": "standard-version --prerelease='rc'",
-    "bump-version:release": "standard-version"
+    "release": "standard-version"
   }
 }

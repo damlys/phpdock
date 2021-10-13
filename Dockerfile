@@ -1,6 +1,7 @@
 FROM damlys/phpdock-env:sdk-0.0.0
 
 ENV VERSION="0.0.12"
+
 COPY ./app/composer.json ./app/composer.lock /app/
 RUN composer install \
 && composer clear-cache
