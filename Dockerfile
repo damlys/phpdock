@@ -10,5 +10,5 @@ COPY ./app /app
 RUN composer run-script build \
 && chmod --recursive a+r /app \
 && chmod --recursive a+x /app/bin/* \
-&& chown --recursive 1000:1000 /app/logs \
+&& chown --recursive www-data:www-data /app/logs \
 && chmod --recursive a+w /app/logs

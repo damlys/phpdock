@@ -19,7 +19,8 @@ services:
     volumes:
       - type: volume
         source: composer_cache
-        target: /var/cache/composer
+        # composer config --global cache-dir
+        target: /root/.composer/cache
       - type: bind
         source: ./app
         target: /app
