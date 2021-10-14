@@ -1,4 +1,8 @@
 FROM php:8.0-fpm AS rte
+# $ cat /etc/passwd | grep 'www-data'
+# www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+# $ cat /etc/group | grep 'www-data'
+# www-data:x:33:
 
 # Install Nginx
 RUN apt-get update && apt-get install --yes --no-install-recommends \
@@ -6,7 +10,10 @@ RUN apt-get update && apt-get install --yes --no-install-recommends \
   nginx \
 && apt-get clean && rm -rf /var/lib/apt/lists/* \
 && service nginx stop \
-&& rm /etc/nginx/nginx.conf
+&& rm \
+  /etc/nginx/nginx.conf \
+  /etc/nginx/sites-available/* \
+  /etc/nginx/sites-enabled/*
 
 # Install PHP extensions
 RUN rm \
