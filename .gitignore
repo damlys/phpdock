@@ -14,10 +14,10 @@ thumbs.db
 ### IDE
 #############################
 
-*.code-workspace
-*.sublime-project
-*.sublime-workspace
-.idea
+/*.code-workspace
+/*.sublime-project
+/*.sublime-workspace
+/.idea
 
 #############################
 ### Docker
@@ -36,6 +36,11 @@ npm-debug.log
 ### PHP
 #############################
 
+vendor
+
+#############################
+### Application
+#############################
+
 /app/logs/*
 !/app/logs/.gitkeep
-/app/vendor

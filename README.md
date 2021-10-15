@@ -2,6 +2,15 @@
 
 Docker starter for PHP projects
 
+## Requirements
+
+```shell
+$ docker --version
+Docker version 20.10.8, build 3967b7d
+$ docker-compose --version
+Docker Compose version v2.0.0
+```
+
 ## 101
 
 ```shell

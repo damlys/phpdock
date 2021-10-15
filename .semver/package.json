@@ -9,6 +9,7 @@
   },
   "scripts": {
     "prepare": "cd .. && husky install ./.semver/husky",
+    "bump-version": "standard-version --skip.changelog --skip.commit --skip.tag",
     "release": "standard-version"
   }
 }

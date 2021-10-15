@@ -11,22 +11,23 @@ desktop.ini
 thumbs.db
 
 #############################
-### IDE
-#############################
-
-*.code-workspace
-*.sublime-project
-*.sublime-workspace
-.idea
-.vscode
-
-#############################
 ### VCS
 #############################
 
 .git
 .gitignore
 .gitkeep
+
+#############################
+### IDE
+#############################
+
+*.code-workspace
+*.sublime-project
+*.sublime-workspace
+.editorconfig
+.idea
+.vscode
 
 #############################
 ### Docker
@@ -43,12 +44,15 @@ docker-compose.yml
 
 node_modules
 npm-debug.log
-package-lock.json
-package.json
 
 #############################
 ### PHP
 #############################
 
+vendor
+
+#############################
+### Application
+#############################
+
 /app/logs/*
-/app/vendor
