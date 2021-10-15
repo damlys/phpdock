@@ -3,6 +3,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: damlys/phpdock-app:${VERSION:-0.1.0-rc.0}
+    image: damlys/phpdock-app:${VERSION:-0.1.0}
     environment:
       HTTP_API_TESTS_ENTRYPOINT: http://app:8080
