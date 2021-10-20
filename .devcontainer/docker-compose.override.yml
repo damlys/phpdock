@@ -2,10 +2,6 @@ services:
   app:
     environment:
       PHP_OPCACHE_ENABLE: "false"
-      # Debugging
-      XDEBUG_MODE: "debug"
-      XDEBUG_CONFIG: "discover_client_host=false client_host=host.docker.internal"
-      PHP_IDE_CONFIG: "serverName=docker"
       # Logs
       NGINX_ACCESS_LOG: "/app/logs/nginx.access.log"
       NGINX_ERROR_LOG: "/app/logs/nginx.error.log"
@@ -16,6 +12,10 @@ services:
       PHP_ERROR_LOG: "/app/logs/php.error.log"
       PHP_LOG_LEVEL: "E_ALL"
       XDEBUG_OUTPUT_DIR: "/app/logs"
+      # Debugging
+      PHP_IDE_CONFIG: "serverName=docker"
+      XDEBUG_MODE: "debug"
+      XDEBUG_CONFIG: "discover_client_host=false client_host=host.docker.internal"
     # Docker Desktop for Mac and Windows automatically adds extra host "host.docker.internal"
     # which points to the host machine.
     # Try to uncomment following lines to add the same functionality to native Docker on Linux.
