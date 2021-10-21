@@ -1,8 +1,25 @@
 services:
+  rte:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: rte
+    image: damlys/phpdock:rte-${VERSION:-0.1.1}
+    deploy:
+      replicas: 0
+  sdk:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: sdk
+    image: damlys/phpdock:sdk-${VERSION:-0.1.1}
+    deploy:
+      replicas: 0
   app:
     build:
       context: .
       dockerfile: Dockerfile
-    image: damlys/phpdock-app:${VERSION:-0.1.1}
+      target: app
+    image: damlys/phpdock:app-${VERSION:-0.1.1}
     environment:
       HTTP_API_TESTS_ENTRYPOINT: http://app:8080

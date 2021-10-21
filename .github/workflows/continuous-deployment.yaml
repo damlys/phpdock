@@ -24,10 +24,6 @@ jobs:
       - name: Clone Git repository
         uses: actions/checkout@v2
 
-      - name: Build and publish ./env Docker images
-        working-directory: ./env
-        run: docker-compose build && docker-compose push
-
       - if: github.event_name == 'push'
         name: Install NPM modules
         working-directory: ./.semver
