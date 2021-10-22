@@ -8,10 +8,10 @@ inject_environment_variables()
 
 if [[ "$(id --user)" == '0' ]]
 then
-  echo 'Generating the "/etc/nginx/nginx.conf" file.'
+  echo 'Generating the "/etc/nginx/nginx.conf" file.' > "$NGINX_ERROR_LOG"
   inject_environment_variables < /etc/nginx/nginx.template.conf > /etc/nginx/nginx.conf
 else
-  echo 'Skipping generation of "/etc/nginx/nginx.conf" file.'
+  echo 'Skipping generation of the "/etc/nginx/nginx.conf" file.' > "$NGINX_ERROR_LOG"
 fi
 
 exec "$@"

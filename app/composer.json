@@ -1,6 +1,6 @@
 {
     "name": "damlys/phpdock",
-    "version": "0.1.1",
+    "version": "0.2.0-rc.0",
     "description": "",
     "autoload": {
         "psr-4": {
@@ -20,6 +20,15 @@
     "scripts": {
         "build": [
             "echo 'Building...'"
+        ],
+        "vulnerability-scan": [
+            "echo 'Scanning vulnerabilities...'"
+        ],
+        "format-check": [
+            "echo 'Checking code format...'"
+        ],
+        "lint-check": [
+            "echo 'Checking code quality...'"
         ],
         "unit-tests": [
             "vendor/bin/phpunit --testsuite 'Unit Tests Suite'"

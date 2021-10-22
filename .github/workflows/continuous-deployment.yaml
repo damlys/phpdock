@@ -37,19 +37,29 @@ jobs:
         working-directory: ./.semver
         run: npm run release
 
-      - name: Build Docker images
-        run: docker-compose build
-
       - name: Link docker-compose.override.yml
         run: ln -s ./.github/docker-compose.override.yml .
+      - name: Build Docker images
+        run: docker-compose build
+      - name: Run Docker vulnerability scanning
+        run: docker scan --severity=high "$(docker-compose config --format=json | jq --join-output .services.app.image)"
+        continue-on-error: true
+
+      - name: Run Composer vulnerability scanning
+        run: docker-compose run --no-TTY --no-deps --rm app composer run-script vulnerability-scan
+      - name: Run code format check
+        run: docker-compose run --no-TTY --no-deps --rm app composer run-script format-check
+      - name: Run code lint check
+        run: docker-compose run --no-TTY --no-deps --rm app composer run-script lint-check
+      - name: Run unit tests
+        run: docker-compose run --no-TTY --no-deps --rm app composer run-script unit-tests
+
       - name: Run Docker containers
         run: docker-compose up --detach
       - name: Wait 10s
         run: sleep 10
-      - name: Run unit tests
-        run: docker-compose exec -T app composer run-script unit-tests
       - name: Run HTTP API tests
-        run: docker-compose exec -T app composer run-script http-api-tests
+        run: docker-compose exec --no-TTY app composer run-script http-api-tests
       - name: Destroy Docker containers
         run: docker-compose down --volumes --remove-orphans
 
