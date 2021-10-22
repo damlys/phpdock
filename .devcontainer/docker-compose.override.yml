@@ -15,7 +15,7 @@ services:
       # Debugging
       PHP_IDE_CONFIG: "serverName=docker"
       XDEBUG_MODE: "debug"
-      XDEBUG_CONFIG: "discover_client_host=false client_host=host.docker.internal"
+      XDEBUG_CONFIG: "client_host=host.docker.internal"
     # Docker Desktop for Mac and Windows automatically adds extra host "host.docker.internal"
     # which points to the host machine.
     # Try to uncomment following lines to add the same functionality to native Docker on Linux.
