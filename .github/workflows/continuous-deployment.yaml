@@ -15,8 +15,8 @@ jobs:
   job0:
     runs-on: ubuntu-20.04
     steps:
-      - name: Login to Docker Hub
-        run: docker login --username="damlys" --password="${{ secrets.DOCKER_TOKEN }}"
+      - name: Login to Docker registry
+        run: docker login "ghcr.io" --username="damlys" --password="${{ secrets.GITHUB_TOKEN }}"
       - name: Set Git user
         run: |
           git config --global user.name "github-actions"
