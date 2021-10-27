@@ -32,6 +32,21 @@ services:
         # composer config --global cache-dir
         target: /root/.composer/cache
       - type: bind
+        source: ./etc/nginx.template.conf
+        target: /etc/nginx/nginx.template.conf
+      - type: bind
+        source: ./etc/php-fpm.conf
+        target: /usr/local/etc/php-fpm.d/php-fpm.conf
+      - type: bind
+        source: ./etc/php.ini
+        target: /usr/local/etc/php/conf.d/php.ini
+      - type: bind
+        source: ./etc/xdebug.ini
+        target: /usr/local/etc/php/conf.d/xdebug.ini
+      - type: bind
+        source: ./bin/entrypoint.bash
+        target: /usr/local/bin/entrypoint.bash
+      - type: bind
         source: ./app
         target: /app
     working_dir: /app
