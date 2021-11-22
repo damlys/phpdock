@@ -1,0 +1,12 @@
+# Docs:
+# https://caddyserver.com/docs/caddyfile
+
+:8080
+
+root * /app/public
+file_server
+php_fastcgi {$CADDY_CGI_SERVER_HOST}:{$CADDY_CGI_SERVER_PORT}
+
+log {
+  level {$CADDY_LOG_LEVEL}
+}

@@ -3,9 +3,7 @@ services:
     environment:
       PHP_OPCACHE_ENABLE: "false"
       # Logs
-      NGINX_ACCESS_LOG: "/app/logs/nginx.access.log"
-      NGINX_ERROR_LOG: "/app/logs/nginx.error.log"
-      NGINX_LOG_LEVEL: "info"
+      CADDY_LOG_LEVEL: "INFO"
       FPM_ACCESS_LOG: "/app/logs/php-fpm.access.log"
       FPM_ERROR_LOG: "/app/logs/php-fpm.error.log"
       FPM_LOG_LEVEL: "notice"
@@ -32,8 +30,8 @@ services:
         # composer config --global cache-dir
         target: /root/.composer/cache
       - type: bind
-        source: ./etc/nginx.template.conf
-        target: /etc/nginx/nginx.template.conf
+        source: ./etc/Caddyfile
+        target: /etc/caddy/Caddyfile
       - type: bind
         source: ./etc/php-fpm.conf
         target: /usr/local/etc/php-fpm.d/php-fpm.conf
@@ -43,9 +41,6 @@ services:
       - type: bind
         source: ./etc/xdebug.ini
         target: /usr/local/etc/php/conf.d/xdebug.ini
-      - type: bind
-        source: ./bin/entrypoint.bash
-        target: /usr/local/bin/entrypoint.bash
       - type: bind
         source: ./app
         target: /app
