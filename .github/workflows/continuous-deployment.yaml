@@ -16,26 +16,32 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Login to Docker registry
-        run: docker login "ghcr.io" --username="damlys" --password="${{ secrets.GITHUB_TOKEN }}"
+        run: docker login 'ghcr.io' --username='damlys' --password='${{ secrets.GITHUB_TOKEN }}'
       - name: Set Git user
         run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
       - name: Clone Git repository
         uses: actions/checkout@v2
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: npm
+          cache-dependency-path: ./.semver
       - if: github.event_name == 'push'
         name: Install NPM modules
         working-directory: ./.semver
-        run: npm install
+        run: npm ci
       - if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
         name: Bump version (prerelease)
         working-directory: ./.semver
-        run: npm run release -- --prerelease='rc'
+        run: npm run release -- --release-as='patch' --prerelease='rc'
       - if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         name: Bump version (release)
         working-directory: ./.semver
-        run: npm run release
+        run: npm run release -- --release-as='patch'
 
       - name: Link docker-compose.override.yml
         run: ln -s ./.github/docker-compose.override.yml .
@@ -47,6 +53,7 @@ jobs:
 
       - name: Run Composer vulnerability scanning
         run: docker-compose run --no-TTY --no-deps --rm app composer run-script vulnerability-scan
+        continue-on-error: true
       - name: Run code format check
         run: docker-compose run --no-TTY --no-deps --rm app composer run-script format-check
       - name: Run code lint check
@@ -72,7 +79,7 @@ jobs:
 
       - if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
         name: Deploy to staging
-        run: echo "Deploying to staging..."
+        run: echo 'Deploying to staging...'
       - if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         name: Deploy to production
-        run: echo "Deploying to production..."
+        run: echo 'Deploying to production...'
