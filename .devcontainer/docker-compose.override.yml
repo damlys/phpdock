@@ -3,6 +3,7 @@ services:
     environment:
       PHP_OPCACHE_ENABLE: "false"
       # Logs
+      CADDY_LOG_OUTPUT: "file /app/logs/caddy.log"
       CADDY_LOG_LEVEL: "INFO"
       FPM_ACCESS_LOG: "/app/logs/php-fpm.access.log"
       FPM_ERROR_LOG: "/app/logs/php-fpm.error.log"
