@@ -54,6 +54,7 @@ COPY ./etc/Caddyfile /etc/caddy/Caddyfile
 ENV CADDY_CGI_SERVER_HOST="127.0.0.1"
 ENV CADDY_CGI_SERVER_PORT="9000"
 ENV CADDY_LOG_OUTPUT="stderr"
+# DEBUG|INFO|WARN|ERROR|PANIC|FATAL (https://caddyserver.com/docs/json/logging/logs/level/)
 ENV CADDY_LOG_LEVEL="ERROR"
 
 # FPM configuration
