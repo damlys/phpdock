@@ -1,5 +1,6 @@
 services:
   app:
+    user: "0"
     environment:
       PHP_OPCACHE_ENABLE: "false"
       # Logs
