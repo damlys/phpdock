@@ -1,4 +1,4 @@
-FROM php:8.0-fpm AS rte
+FROM php:8.1-fpm AS rte
 # $ cat /etc/passwd | grep 'www-data'
 # www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
 # $ cat /etc/group | grep 'www-data'
@@ -112,7 +112,7 @@ ENV XDEBUG_OUTPUT_DIR="/tmp"
 
 FROM sdk AS app
 
-ENV VERSION="8.0.0"
+ENV VERSION="8.1.0-rc.0"
 
 COPY ./app/composer.json ./app/composer.lock /app/
 RUN composer install \
