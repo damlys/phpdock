@@ -4,16 +4,20 @@ FROM php:8.0-fpm AS rte
 # $ cat /etc/group | grep 'www-data'
 # www-data:x:33:
 
-# Install Nginx
+# Install Caddy
 RUN apt-get update && apt-get install --yes --no-install-recommends \
-  gettext \
-  nginx \
+  apt-transport-https \
+  debian-archive-keyring \
+  debian-keyring \
 && apt-get clean && rm -rf /var/lib/apt/lists/* \
-&& service nginx stop \
+&& curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | tee /etc/apt/trusted.gpg.d/caddy-stable.asc \
+&& curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | tee /etc/apt/sources.list.d/caddy-stable.list \
+&& apt-get update && apt-get install --yes --no-install-recommends \
+  caddy \
+  mime-support \
+&& apt-get clean && rm -rf /var/lib/apt/lists/* \
 && rm \
-  /etc/nginx/nginx.conf \
-  /etc/nginx/sites-available/* \
-  /etc/nginx/sites-enabled/*
+  /etc/caddy/Caddyfile
 
 # Install PHP extensions
 RUN rm \
@@ -46,15 +50,13 @@ RUN apt-get update && apt-get install --yes --no-install-recommends \
 && php /usr/local/bin/composer-installer --install-dir=/usr/local/bin --filename=composer \
 && rm /usr/local/bin/composer-installer
 
-# Nginx configuration
-COPY ./etc/nginx.template.conf /etc/nginx/nginx.template.conf
-ENV NGINX_WORKERS_COUNT="1"
-ENV NGINX_CGI_SERVER_HOST="127.0.0.1"
-ENV NGINX_CGI_SERVER_PORT="9000"
-ENV NGINX_ACCESS_LOG="/dev/stdout"
-ENV NGINX_ERROR_LOG="/dev/stderr"
-# debug|info|notice|warn|error|crit|alert|emerg (http://nginx.org/en/docs/ngx_core_module.html#error_log)
-ENV NGINX_LOG_LEVEL="error"
+# Caddy configuration
+COPY ./etc/Caddyfile /etc/caddy/Caddyfile
+ENV CADDY_CGI_SERVER_HOST="127.0.0.1"
+ENV CADDY_CGI_SERVER_PORT="9000"
+ENV CADDY_LOG_OUTPUT="stderr"
+# DEBUG|INFO|WARN|ERROR|PANIC|FATAL (https://caddyserver.com/docs/json/logging/logs/level/)
+ENV CADDY_LOG_LEVEL="ERROR"
 
 # FPM configuration
 COPY ./etc/php-fpm.conf /usr/local/etc/php-fpm.d/php-fpm.conf
@@ -76,10 +78,8 @@ ENV PHP_LOG_LEVEL="E_ERROR"
 ENV COMPOSER_ALLOW_SUPERUSER="1"
 
 # Entrypoint
-COPY ./bin/entrypoint.bash /usr/local/bin/entrypoint.bash
-RUN chmod a+x /usr/local/bin/entrypoint.bash
-ENTRYPOINT ["entrypoint.bash"]
-CMD ["bash", "-c", "php-fpm --daemonize && nginx"]
+ENTRYPOINT []
+CMD ["bash", "-c", "php-fpm --daemonize && caddy run --config=/etc/caddy/Caddyfile"]
 EXPOSE 8080 9000
 HEALTHCHECK NONE
 WORKDIR /app
@@ -124,3 +124,5 @@ RUN composer run-script build \
 && chmod --recursive a+x /app/bin/* \
 && chown --recursive www-data:www-data /app/logs \
 && chmod --recursive a+w /app/logs
+
+USER www-data:www-data
