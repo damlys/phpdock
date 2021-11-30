@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
       target: rte
-    image: ghcr.io/damlys/phpdock:rte-${VERSION:-0.2.4}
+    image: ghcr.io/damlys/phpdock:rte-${VERSION:-8.0.0-rc.0}
     deploy:
       replicas: 0
   sdk:
@@ -12,7 +12,7 @@ services:
       context: .
       dockerfile: Dockerfile
       target: sdk
-    image: ghcr.io/damlys/phpdock:sdk-${VERSION:-0.2.4}
+    image: ghcr.io/damlys/phpdock:sdk-${VERSION:-8.0.0-rc.0}
     deploy:
       replicas: 0
   app:
@@ -20,6 +20,6 @@ services:
       context: .
       dockerfile: Dockerfile
       target: app
-    image: ghcr.io/damlys/phpdock:app-${VERSION:-0.2.4}
+    image: ghcr.io/damlys/phpdock:app-${VERSION:-8.0.0-rc.0}
     environment:
       HTTP_API_TESTS_ENTRYPOINT: http://app:8080

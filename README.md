@@ -6,9 +6,9 @@ Docker starter for PHP projects
 
 ```shell
 $ docker --version
-Docker version 20.10.8, build 3967b7d
+Docker version 20.10.10, build b485636
 $ docker-compose --version
-Docker Compose version v2.0.0
+Docker Compose version v2.1.1
 ```
 
 ## 101
