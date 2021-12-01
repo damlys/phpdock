@@ -24,6 +24,7 @@ RUN rm \
   /usr/local/etc/php-fpm.d/* \
   /usr/local/etc/php/conf.d/* \
 && apt-get update && apt-get install --yes --no-install-recommends \
+  libicu-dev \
   libpq-dev \
   libzip-dev \
   unzip \
@@ -34,6 +35,7 @@ RUN rm \
   redis \
 && pecl clear-cache \
 && docker-php-ext-install \
+  intl \
   opcache \
   pdo_mysql \
   pdo_pgsql \
