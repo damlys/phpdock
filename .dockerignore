@@ -35,15 +35,6 @@ thumbs.db
 
 .dockerignore
 Dockerfile
-docker-compose.*.yml
-docker-compose.yml
-
-#############################
-### Node.js
-#############################
-
-node_modules
-npm-debug.log
 
 #############################
 ### PHP

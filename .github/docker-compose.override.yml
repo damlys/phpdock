@@ -1,4 +1,0 @@
-services:
-  app:
-    environment:
-      PHP_OPCACHE_ENABLE: "false"
