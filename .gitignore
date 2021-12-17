@@ -18,17 +18,7 @@ thumbs.db
 /*.sublime-project
 /*.sublime-workspace
 /.idea
-
-#############################
-### Docker
-#############################
-
-
-#############################
-### PHP
-#############################
-
-vendor
+/.vscode
 
 #############################
 ### Application
@@ -36,3 +26,4 @@ vendor
 
 /app/logs/*
 !/app/logs/.gitkeep
+/app/vendor

@@ -6,32 +6,34 @@ Docker starter for PHP projects
 
 ```shell
 $ docker --version
-Docker version 20.10.10, build b485636
-$ docker-compose --version
-Docker Compose version v2.1.1
+Docker version 20.10.11, build dea9396
+
+$ kubectl version --client --short
+Client Version: v1.22.4
+
+$ helm version --short
+v3.7.2+g663a896
+
+$ skaffold version
+v1.35.1
 ```
 
-## 101
+## Development
 
 ```shell
-$ ln -s ./.devcontainer/docker-compose.override.yml .
-$ docker-compose build
-$ docker-compose up --detach
-$ docker-compose exec app bash -ce "
-    composer install
-    composer run-script build
-    chown -R $(id -u):$(id -g) .
-    composer run-script vulnerability-scan
-    composer run-script format-check
-    composer run-script lint-check
-    composer run-script unit-tests
-    composer run-script http-api-tests
-  "
-$ docker-compose exec app bash
+$ skaffold build
+$ skaffold render --digest-source=tag
+$ kubectl exec app -it -- bash
 ```
 
-Go to [http://127.0.0.1:38080](http://127.0.0.1:38080)
+## Distribution
 
 ```shell
-$ docker-compose down --remove-orphans
+$
+```
+
+## Deployment
+
+```shell
+$
 ```

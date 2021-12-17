@@ -30,20 +30,18 @@ thumbs.db
 .vscode
 
 #############################
-### Docker
+### Platform
 #############################
 
-.dockerignore
-Dockerfile
-
-#############################
-### PHP
-#############################
-
-vendor
+/.dockerignore
+/.github
+/Dockerfile
+/k8s
+/skaffold.yaml
 
 #############################
 ### Application
 #############################
 
 /app/logs/*
+/app/vendor

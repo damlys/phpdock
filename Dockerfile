@@ -80,7 +80,6 @@ ENV PHP_LOG_LEVEL="E_ERROR"
 ENV COMPOSER_ALLOW_SUPERUSER="1"
 
 # Entrypoint
-ENTRYPOINT []
 CMD ["bash", "-c", "php-fpm --daemonize && caddy run --config=/etc/caddy/Caddyfile"]
 EXPOSE 8080 9000
 HEALTHCHECK NONE
