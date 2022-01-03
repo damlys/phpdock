@@ -11,17 +11,9 @@ build:
         dockerfile: Dockerfile
       sync:
         manual:
-#          - src: ./etc/Caddyfile
-#            dest: /etc/caddy/Caddyfile
-#          - src: ./etc/php-fpm.conf
-#            dest: /usr/local/etc/php-fpm.d/php-fpm.conf
-#          - src: ./etc/php.ini
-#            dest: /usr/local/etc/php/conf.d/php.ini
-#          - src: ./etc/xdebug.ini
-#            dest: /usr/local/etc/php/conf.d/xdebug.ini
           - src: app/**/*
-            dest: /app
             strip: app
+            dest: /app
   tagPolicy:
     gitCommit:
       variant: AbbrevCommitSha
