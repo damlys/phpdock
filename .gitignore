@@ -15,8 +15,6 @@ thumbs.db
 #############################
 
 /*.code-workspace
-/*.sublime-project
-/*.sublime-workspace
 /.idea
 /.vscode
 
