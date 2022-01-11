@@ -32,10 +32,12 @@ thumbs.db
 #############################
 
 /.dockerignore
-/.github
+/.terraform
+/.terraform.lock.hcl
 /Dockerfile
 /k8s
 /skaffold.yaml
+/terraform.tf
 
 #############################
 ### Application
