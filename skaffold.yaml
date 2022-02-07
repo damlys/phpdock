@@ -21,7 +21,7 @@ deploy:
   kubeContext: docker-desktop
   kubectl:
     manifests:
-      - ./k8s/pod.yaml
+      - ./pod.yaml
 portForward:
   - namespace: default
     resourceType: pod

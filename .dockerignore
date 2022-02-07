@@ -35,7 +35,7 @@ thumbs.db
 /.terraform
 /.terraform.lock.hcl
 /Dockerfile
-/k8s
+/pod.yaml
 /skaffold.yaml
 /terraform.tf
 
