@@ -14,8 +14,6 @@ insert_final_newline = true
 
 [*.feature]
 
-[*.{hcl,tf,tfvars}]
-
 [*.{html,xml}]
 
 [*.{js,json}]

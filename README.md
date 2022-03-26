@@ -16,9 +16,6 @@ v3.7.2+g663a896
 
 $ skaffold version
 v1.35.1
-
-$ terraform version
-Terraform v1.1.3
 ```
 
 ## Development
