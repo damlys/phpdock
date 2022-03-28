@@ -6,30 +6,23 @@ Docker starter for PHP projects
 
 ```shell
 $ docker --version
-Docker version 20.10.11, build dea9396
+Docker version 20.10.13, build a224086
 
 $ kubectl version --client --short
-Client Version: v1.22.4
-
-$ helm version --short
-v3.7.2+g663a896
+Client Version: v1.22.5
 
 $ skaffold version
-v1.35.1
+v1.37.0
 ```
 
 ## Development
 
 ```shell
-$ skaffold build
-$ skaffold render --digest-source=tag
-$ kubectl exec app -it -- bash
-```
+$ docker context use desktop-linux
+$ kubectl config use-context docker-desktop
 
-## Distribution
-
-```shell
-$
+$ skaffold dev
+$ kubectl --context=docker-desktop --namespace=default exec app -it -- bash
 ```
 
 ## Deployment

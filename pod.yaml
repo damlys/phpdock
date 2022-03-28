@@ -4,22 +4,27 @@ metadata:
   namespace: default
   name: app
 spec:
+  imagePullSecrets: []
   containers:
-    - name: container0
+    - name: http-server
       image: ghcr.io/damlys/phpdock
-      env:
-        - name: PHP_OPCACHE_ENABLE
-          value: "false"
+      imagePullPolicy: Never
       securityContext:
         runAsUser: 0
         runAsGroup: 0
+      env:
+        - name: PHP_OPCACHE_ENABLE
+          value: "false"
+      #command: []
+      #args: []
+      ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
       resources:
         requests:
           cpu: 250m
-          limit: 256M
+          memory: 256M
         limits:
           cpu: 1000m
           memory: 1G
-      ports:
-        - containerPort: 8080
-          protocol: TCP
