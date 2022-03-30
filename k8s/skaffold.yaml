@@ -1,0 +1,37 @@
+apiVersion: skaffold/v2beta28
+kind: Config
+build:
+  local:
+    push: false
+  artifacts:
+    - image: ghcr.io/damlys/phpdock
+      context: ..
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: app/**/*
+            strip: app
+            dest: /app
+  tagPolicy:
+    inputDigest: {}
+deploy:
+  kubeContext: docker-desktop
+  helm:
+    releases:
+      - name: phpdock-dev-0
+        namespace: default
+        chartPath: ./helm/charts/phpdock-dev
+        valuesFiles:
+          - ./helm/releases/phpdock-dev-0/values.yaml
+        artifactOverrides:
+          imageKey: ghcr.io/damlys/phpdock
+        imageStrategy:
+          helm:
+            explicitRegistry: true
+portForward:
+  - resourceType: pod
+    resourceName: phpdock-dev-0-http-server
+    namespace: default
+    port: 8080
+    localPort: 38080

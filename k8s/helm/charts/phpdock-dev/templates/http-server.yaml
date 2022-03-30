@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ .Release.Name }}-http-server"
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  imagePullSecrets:
+    {{- toYaml .Values.imageKey.pullSecrets | nindent 4 }}
+  containers:
+    - name: http-server
+      image: "{{ .Values.imageKey.registry }}/{{ .Values.imageKey.repository }}:{{ .Values.imageKey.tag }}"
+      imagePullPolicy: "{{ .Values.imageKey.pullPolicy }}"
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+      env:
+        {{- if .Values.envs }}
+        {{- range $key, $val := .Values.envs }}
+        - name: {{ $key }}
+          value: {{ $val | quote }}
+        {{- end }}
+        {{- else }}
+        {}
+        {{- end }}
+      #command: []
+      #args: []
+      ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+      resources:
+        requests:
+          cpu: 250m
+          memory: 256M
+        limits:
+          cpu: 1000m
+          memory: 1G

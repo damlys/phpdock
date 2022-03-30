@@ -1,0 +1,8 @@
+imageKey:
+  registry: ghcr.io
+  repository: damlys/phpdock
+  tag: latest
+  pullPolicy: Never
+  pullSecrets: []
+
+envs: {}

@@ -33,8 +33,7 @@ thumbs.db
 
 /.dockerignore
 /Dockerfile
-/pod.yaml
-/skaffold.yaml
+/k8s
 
 #############################
 ### Application
