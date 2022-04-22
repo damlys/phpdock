@@ -1,2 +1,0 @@
-envs:
-  PHP_OPCACHE_ENABLE: "false"

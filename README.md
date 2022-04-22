@@ -26,9 +26,8 @@ $ kubectl config use-context docker-desktop
 ```
 
 ```shell
-$ cd ./k8s
-$ skaffold dev
-$ kubectl --context=docker-desktop --namespace=default exec phpdock-dev-0-http-server -it -- bash
+$ skaffold render --digest-source=local
+$ skaffold dev --port-forward
 ```
 
 ## Deployment

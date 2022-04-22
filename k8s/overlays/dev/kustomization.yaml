@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base
+patchesStrategicMerge:
+  - deployment.patch.yaml
+configMapGenerator:
+  - name: phpdock
+    behavior: merge
+    literals:
+      - PHP_OPCACHE_ENABLE=false
+namespace: default
+nameSuffix: -dev
+commonLabels:
+  app.kubernetes.io/name: "phpdock"
+  app.kubernetes.io/instance: "dev"
