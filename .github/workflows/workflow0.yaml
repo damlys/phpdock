@@ -1,9 +1,9 @@
-name: continuous-deployment
+name: workflow0
 on:
   push:
     branches:
       - develop
-      - master
+      - main
     paths:
       - "**"
       - "!**.md"
@@ -38,7 +38,7 @@ jobs:
         name: Bump version (prerelease)
         working-directory: ./.semver
         run: npm run release -- --release-as='patch' --prerelease='rc'
-      - if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      - if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         name: Bump version (release)
         working-directory: ./.semver
         run: npm run release -- --release-as='patch'
@@ -80,6 +80,6 @@ jobs:
       - if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
         name: Deploy to staging
         run: echo 'Deploying to staging...'
-      - if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      - if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         name: Deploy to production
         run: echo 'Deploying to production...'
