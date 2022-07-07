@@ -115,7 +115,7 @@ ENV XDEBUG_OUTPUT_DIR="/tmp"
 
 FROM sdk AS app
 
-ENV VERSION="8.1.3"
+ENV VERSION="8.1.4"
 
 COPY ./app/composer.json ./app/composer.lock /app/
 RUN composer install \
