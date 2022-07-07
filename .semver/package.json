@@ -1,11 +1,11 @@
 {
   "private": true,
   "devDependencies": {
-    "@commitlint/cli": "^15.0.0",
-    "@commitlint/config-conventional": "^15.0.0",
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
     "@damlys/standard-version-updater-docker": "^1.0.0",
-    "husky": "^7.0.4",
-    "standard-version": "^9.3.2"
+    "husky": "^8.0.1",
+    "standard-version": "^9.5.0"
   },
   "scripts": {
     "prepare": "cd .. && husky install ./.semver/husky",

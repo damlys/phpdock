@@ -2,14 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### 8.1.2 (2022-07-07)
-
+## 8.1.2 (2022-07-07)
 
 ### Bug Fixes
 
 * **caddy:** install gpg ([88a051a](https://github.com/damlys/phpdock/commit/88a051a119e66e572c58d4a2a57e72807f557acd))
 
-### 8.1.1 (2021-12-01)
+## 8.1.1 (2021-12-01)
 
 ## 8.1.0 (2021-11-30)
 
