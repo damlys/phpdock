@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install --yes --no-install-recommends \
   debian-archive-keyring \
   debian-keyring \
 && apt-get clean && rm -rf /var/lib/apt/lists/* \
-&& curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | tee /etc/apt/trusted.gpg.d/caddy-stable.asc \
+&& curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg \
 && curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | tee /etc/apt/sources.list.d/caddy-stable.list \
 && apt-get update && apt-get install --yes --no-install-recommends \
   caddy \
