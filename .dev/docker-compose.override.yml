@@ -31,6 +31,18 @@ services:
         source: composer_cache
         target: /root/.composer/cache # composer config --global cache-dir
       - type: bind
+        source: ./docker-images/rte/etc/Caddyfile
+        target: /etc/caddy/Caddyfile
+      - type: bind
+        source: ./docker-images/rte/etc/php-fpm.conf
+        target: /usr/local/etc/php-fpm.d/php-fpm.conf
+      - type: bind
+        source: ./docker-images/rte/etc/php.ini
+        target: /usr/local/etc/php/conf.d/php.ini
+      - type: bind
+        source: ./docker-images/sdk/etc/xdebug.ini
+        target: /usr/local/etc/php/conf.d/xdebug.ini
+      - type: bind
         source: ./docker-images/app
         target: /app
     working_dir: /app
