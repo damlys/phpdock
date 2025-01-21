@@ -1,12 +1,12 @@
 {
   "configurations": [
     {
-      "name": "Listen for Xdebug",
+      "name": "Listen for Xdebug: docker-images/app",
       "type": "php",
       "request": "launch",
       "port": 9003,
       "pathMappings": {
-        "/app": "${workspaceFolder}/app"
+        "/app": "${workspaceFolder}/docker-images/app"
       }
     }
   ]

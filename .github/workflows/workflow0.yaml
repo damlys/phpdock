@@ -13,7 +13,7 @@ on:
       - "!**.md"
 jobs:
   job0:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Login to Docker registry
         run: docker login 'ghcr.io' --username='damlys' --password='${{ secrets.GITHUB_TOKEN }}'
@@ -24,58 +24,36 @@ jobs:
       - name: Clone Git repository
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          cache: npm
-          cache-dependency-path: ./.semver
-      - if: github.event_name == 'push'
-        name: Install NPM modules
-        working-directory: ./.semver
-        run: npm ci
-      - if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
-        name: Bump version (prerelease)
-        working-directory: ./.semver
-        run: npm run release -- --release-as='patch' --prerelease='rc'
-      - if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        name: Bump version (release)
-        working-directory: ./.semver
-        run: npm run release -- --release-as='patch'
-
       - name: Link docker-compose.override.yml
         run: ln -s ./.github/docker-compose.override.yml .
       - name: Build Docker images
-        run: docker-compose build
+        run: docker compose build
       - name: Run Docker vulnerability scanning
-        run: docker scan --severity=high "$(docker-compose config --format=json | jq --join-output .services.app.image)"
+        run: docker scan --severity=high "$(docker compose config --format=json | jq --join-output .services.app.image)"
         continue-on-error: true
 
       - name: Run Composer vulnerability scanning
-        run: docker-compose run -T --no-deps --rm app composer run-script vulnerability-scan
+        run: docker compose run -T --no-deps --rm app composer run-script vulnerability-scan
         continue-on-error: true
       - name: Run code format check
-        run: docker-compose run -T --no-deps --rm app composer run-script format-check
+        run: docker compose run -T --no-deps --rm app composer run-script format-check
       - name: Run code lint check
-        run: docker-compose run -T --no-deps --rm app composer run-script lint-check
+        run: docker compose run -T --no-deps --rm app composer run-script lint-check
       - name: Run unit tests
-        run: docker-compose run -T --no-deps --rm app composer run-script unit-tests
+        run: docker compose run -T --no-deps --rm app composer run-script unit-tests
 
       - name: Run Docker containers
-        run: docker-compose up --detach
+        run: docker compose up --detach
       - name: Wait 10s
         run: sleep 10
       - name: Run HTTP API tests
-        run: docker-compose exec -T app composer run-script http-api-tests
+        run: docker compose exec -T app composer run-script http-api-tests
       - name: Destroy Docker containers
-        run: docker-compose down --volumes --remove-orphans
+        run: docker compose down --volumes --remove-orphans
 
       - if: github.event_name == 'push'
         name: Publish Docker images
-        run: docker-compose push
-      - if: github.event_name == 'push'
-        name: Publish version
-        run: git push && git push --tags
+        run: docker compose push
 
       - if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
         name: Deploy to staging
