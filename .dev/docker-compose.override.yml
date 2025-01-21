@@ -1,6 +1,6 @@
 services:
   app:
-    user: "0" # root
+    user: "0"
     environment:
       PHP_OPCACHE_ENABLE: "false"
       # Logs
@@ -29,7 +29,8 @@ services:
     volumes:
       - type: volume
         source: composer_cache
-        target: /root/.composer/cache # composer config --global cache-dir
+        # composer config --global cache-dir
+        target: /root/.composer/cache
       - type: bind
         source: ./docker-images/rte/etc/Caddyfile
         target: /etc/caddy/Caddyfile
