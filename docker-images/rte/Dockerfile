@@ -4,49 +4,8 @@ FROM php:8.4-fpm
 # $ cat /etc/group | grep 'www-data'
 # www-data:x:33:
 
-# Install Nginx
-RUN apt-get update && apt-get install --yes --no-install-recommends \
-  gettext \
-  nginx \
-  && apt-get clean && rm -rf /var/lib/apt/lists/* \
-  && service nginx stop \
-  && rm \
-  /etc/nginx/nginx.conf \
-  /etc/nginx/sites-available/* \
-  /etc/nginx/sites-enabled/*
-
-# Install PHP extensions
-RUN rm \
-  /usr/local/etc/php-fpm.d/* \
-  /usr/local/etc/php/conf.d/* \
-  && apt-get update && apt-get install --yes --no-install-recommends \
-  libicu-dev \
-  libpq-dev \
-  libzip-dev \
-  unzip \
-  zip \
-  zlib1g-dev \
-  && apt-get clean && rm -rf /var/lib/apt/lists/* \
-  && pecl install \
-  redis \
-  && pecl clear-cache \
-  && docker-php-ext-install \
-  intl \
-  opcache \
-  pdo_mysql \
-  pdo_pgsql \
-  zip \
-  && docker-php-ext-enable \
-  redis \
-  sodium
-
-# Install Composer
-RUN apt-get update && apt-get install --yes --no-install-recommends \
-  git \
-  && apt-get clean && rm -rf /var/lib/apt/lists/* \
-  && php -r 'copy("https://getcomposer.org/installer", "/usr/local/bin/composer-installer");' \
-  && php /usr/local/bin/composer-installer --install-dir=/usr/local/bin --filename=composer \
-  && rm /usr/local/bin/composer-installer
+COPY ./Dockerfile.bash /Dockerfile.bash
+RUN /Dockerfile.bash && rm /Dockerfile.bash
 
 # Nginx configuration
 COPY ./etc/nginx.template.conf /etc/nginx/nginx.template.conf
