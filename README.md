@@ -15,7 +15,7 @@ Docker Compose version v2.31.0-desktop.2
 ## 101
 
 ```shell
-$ ln -s ./.dev/docker-compose.override.yml .
+$ ln -s ./.devcontainer/docker-compose.override.yml .
 
 $ docker compose build
 $ docker compose up --detach
