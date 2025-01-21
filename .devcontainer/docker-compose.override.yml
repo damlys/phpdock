@@ -1,11 +1,11 @@
 services:
   app:
-    user: "0"
     environment:
       PHP_OPCACHE_ENABLE: "false"
       # Logs
-      CADDY_LOG_OUTPUT: "file /app/logs/caddy.log"
-      CADDY_LOG_LEVEL: "INFO"
+      NGINX_ACCESS_LOG: "/app/logs/nginx.access.log"
+      NGINX_ERROR_LOG: "/app/logs/nginx.error.log"
+      NGINX_LOG_LEVEL: "info"
       FPM_ACCESS_LOG: "/app/logs/php-fpm.access.log"
       FPM_ERROR_LOG: "/app/logs/php-fpm.error.log"
       FPM_LOG_LEVEL: "notice"
@@ -32,8 +32,8 @@ services:
         # composer config --global cache-dir
         target: /root/.composer/cache
       - type: bind
-        source: ./docker-images/rte/etc/Caddyfile
-        target: /etc/caddy/Caddyfile
+        source: ./docker-images/rte/etc/nginx.template.conf
+        target: /etc/nginx/nginx.template.conf
       - type: bind
         source: ./docker-images/rte/etc/php-fpm.conf
         target: /usr/local/etc/php-fpm.d/php-fpm.conf
@@ -43,6 +43,9 @@ services:
       - type: bind
         source: ./docker-images/sdk/etc/xdebug.ini
         target: /usr/local/etc/php/conf.d/xdebug.ini
+      - type: bind
+        source: ./docker-images/rte/bin/entrypoint.bash
+        target: /usr/local/bin/entrypoint.bash
       - type: bind
         source: ./docker-images/app
         target: /app

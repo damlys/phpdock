@@ -10,5 +10,3 @@ RUN composer run-script build \
   && chmod --recursive a+x /app/bin/* \
   && chown --recursive www-data:www-data /app/logs \
   && chmod --recursive a+w /app/logs
-
-USER www-data:www-data
