@@ -7,10 +7,10 @@ class WelcomeTest extends \PHPUnit\Framework\TestCase
 {
     protected function getHttpApiTestsEntrypoint(): string
     {
-        if (!isset($_ENV['HTTP_API_TESTS_ENTRYPOINT']) || !$_ENV['HTTP_API_TESTS_ENTRYPOINT']) {
+        if (!isset($_ENV['APP_HTTP_API_TESTS_ENTRYPOINT']) || !$_ENV['APP_HTTP_API_TESTS_ENTRYPOINT']) {
             throw new \Exception('HTTP API tests entrypoint is not defined.');
         }
-        return $_ENV['HTTP_API_TESTS_ENTRYPOINT'];
+        return $_ENV['APP_HTTP_API_TESTS_ENTRYPOINT'];
     }
 
     public function testWelcomeMessage(): void

@@ -1,25 +1,28 @@
 services:
   rte:
     build:
-      context: .
+      context: ./docker-images/rte
       dockerfile: Dockerfile
-      target: rte
-    image: ghcr.io/damlys/phpdock:rte-${VERSION:-8.1.4}
+    image: ghcr.io/damlys/phpdock-rte:0.0.0
     deploy:
       replicas: 0
+
   sdk:
+    depends_on:
+      - rte
     build:
-      context: .
+      context: ./docker-images/sdk
       dockerfile: Dockerfile
-      target: sdk
-    image: ghcr.io/damlys/phpdock:sdk-${VERSION:-8.1.4}
+    image: ghcr.io/damlys/phpdock-sdk:0.0.0
     deploy:
       replicas: 0
+
   app:
+    depends_on:
+      - sdk
     build:
-      context: .
+      context: ./docker-images/app
       dockerfile: Dockerfile
-      target: app
-    image: ghcr.io/damlys/phpdock:app-${VERSION:-8.1.4}
+    image: ghcr.io/damlys/phpdock-app:0.0.0
     environment:
-      HTTP_API_TESTS_ENTRYPOINT: http://app:8080
+      APP_HTTP_API_TESTS_ENTRYPOINT: http://app:8080

@@ -2,11 +2,11 @@
 ### System
 #############################
 
+.DS_Store
 *.bak
 *.swp
 *.tmp
 *~
-.DS_Store
 desktop.ini
 thumbs.db
 
@@ -22,28 +22,19 @@ thumbs.db
 ### IDE
 #############################
 
-*.code-workspace
-*.sublime-project
-*.sublime-workspace
-.editorconfig
 .idea
 .vscode
+*.code-workspace
 
 #############################
 ### Docker
 #############################
 
 .dockerignore
-Dockerfile
+.env
 docker-compose.*.yml
 docker-compose.yml
-
-#############################
-### Node.js
-#############################
-
-node_modules
-npm-debug.log
+Dockerfile
 
 #############################
 ### PHP
