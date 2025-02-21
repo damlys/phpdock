@@ -32,8 +32,8 @@ services:
         # composer config --global cache-dir
         target: /root/.composer/cache
       - type: bind
-        source: ./docker-images/rte/etc/nginx.template.conf
-        target: /etc/nginx/nginx.template.conf
+        source: ./docker-images/rte/etc/nginx.conf
+        target: /etc/nginx/nginx.conf
       - type: bind
         source: ./docker-images/rte/etc/php-fpm.conf
         target: /usr/local/etc/php-fpm.d/php-fpm.conf
@@ -43,9 +43,6 @@ services:
       - type: bind
         source: ./docker-images/sdk/etc/xdebug.ini
         target: /usr/local/etc/php/conf.d/xdebug.ini
-      - type: bind
-        source: ./docker-images/rte/bin/entrypoint.bash
-        target: /usr/local/bin/entrypoint.bash
       - type: bind
         source: ./docker-images/app
         target: /app

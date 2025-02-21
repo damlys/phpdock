@@ -8,7 +8,7 @@ COPY ./Dockerfile.bash /Dockerfile.bash
 RUN /Dockerfile.bash && rm /Dockerfile.bash
 
 # Nginx configuration
-COPY ./etc/nginx.template.conf /etc/nginx/nginx.template.conf
+COPY ./etc/nginx.conf /etc/nginx/nginx.conf
 ENV NGINX_WORKERS_COUNT="1"
 ENV NGINX_CGI_SERVER_HOST="127.0.0.1"
 ENV NGINX_CGI_SERVER_PORT="9000"
@@ -37,9 +37,7 @@ ENV PHP_LOG_LEVEL="E_ERROR"
 ENV COMPOSER_ALLOW_SUPERUSER="1"
 
 # Entrypoint
-COPY ./bin/entrypoint.bash /usr/local/bin/entrypoint.bash
-RUN chmod a+x /usr/local/bin/entrypoint.bash
-ENTRYPOINT ["entrypoint.bash"]
+ENTRYPOINT []
 CMD ["bash", "-c", "php-fpm --daemonize && nginx"]
 EXPOSE 8080 9000
 HEALTHCHECK NONE

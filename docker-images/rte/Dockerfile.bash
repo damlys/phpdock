@@ -5,7 +5,6 @@ apt-get update
 
 # install Nginx
 apt-get install --yes --no-install-recommends \
-  gettext \
   nginx
 
 service nginx stop
