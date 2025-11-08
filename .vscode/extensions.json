@@ -1,5 +1,7 @@
 {
   "recommendations": [
+    "EditorConfig.EditorConfig",
     "xdebug.php-debug"
+    //
   ]
 }
